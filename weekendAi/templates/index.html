@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dummy App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        #alert-modal {
+            display: none;
+            position: fixed;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            border: 1px solid #ccc;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            z-index: 1000;
+        }
+        #alert-modal button {
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome</h1>
+    <form id="login-form">
+        <input type="email" id="email" placeholder="Email">
+        <button type="submit">Login</button>
+    </form>
+    <div id="alert-modal">
+        <p id="alert-message"></p>
+        <button id="suggest-yes">Yes</button>
+        <button id="suggest-no">No</button>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
