@@ -1,0 +1,29 @@
+2025-05-17 18:34:19,673Z,backend,GET /home 200 OK,None
+2025-05-17 18:34:19,767Z,backend,SyntaxError: missing ) after argument list,SyntaxError
+2025-05-17 18:34:21,253Z,backend,GET /home 200 OK,None
+2025-05-17 18:34:21,298Z,backend,SyntaxError: missing ) after argument list,SyntaxError
+2025-05-17 18:34:23,459Z,backend,GET /home 200 OK,None
+2025-05-17 18:34:23,497Z,backend,SyntaxError: missing ) after argument list,SyntaxError
+2025-05-17 18:34:52,656Z,backend,GET /home 200 OK,None
+2025-05-17 18:34:52,712Z,backend,SyntaxError: missing ) after argument list,SyntaxError
+2025-05-17 18:34:54,760Z,backend,GET /home 200 OK,None
+2025-05-17 18:34:54,787Z,backend,SyntaxError: missing ) after argument list,SyntaxError
+2025-05-17 18:35:08,166Z,backend,GET /home 200 OK,None
+2025-05-17 18:35:08,199Z,backend,SyntaxError: missing ) after argument list,SyntaxError
+2025-05-17 18:35:10,140Z,backend,GET /home 200 OK,None
+2025-05-17 18:35:10,174Z,backend,SyntaxError: missing ) after argument list,SyntaxError
+2025-05-17 18:37:55,548Z,backend,GET /home 200 OK,None
+2025-05-17 18:37:57,310Z,backend,POST /login successful,None
+2025-05-17 18:38:25,370Z,backend,POST /login successful,None
+2025-05-17 18:38:25,602Z,backend,POST /login successful,None
+2025-05-17 18:38:26,000Z,backend,POST /login successful,None
+2025-05-17 18:38:26,194Z,backend,POST /login successful,None
+2025-05-17 18:38:26,389Z,backend,POST /login successful,None
+2025-05-17 18:38:26,564Z,backend,POST /login successful,None
+2025-05-17 18:38:26,744Z,backend,myUndefinedFunction is not defined,ReferenceError
+2025-05-17 18:38:26,896Z,backend,POST /login successful,None
+2025-05-17 18:38:27,067Z,backend,POST /login successful,None
+2025-05-17 18:38:27,235Z,backend,POST /login successful,None
+2025-05-17 18:38:27,394Z,backend,POST /login successful,None
+2025-05-17 18:38:27,533Z,backend,myUndefinedFunction is not defined,ReferenceError
+2025-05-17 18:38:27,678Z,backend,myUndefinedFunction is not defined,ReferenceError

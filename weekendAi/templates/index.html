@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dummy App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Welcome</h1>
+    <form id="login-form">
+        <input type="email" id="email" placeholder="Email">
+        <button type="submit">Login</button>
+    </form>
+    <script>
+        // Global error handler for uncaught errors (including SyntaxError)
+        window.onerror = function(msg, url, lineNo, columnNo, error) {
+            fetch('/log-error', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    source: 'frontend',
+                    message: msg,
+                    error_type: error ? error.name : 'UnknownError'
+                })
+            });
+        };
+    </script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
