@@ -1,0 +1,12 @@
+2025-05-18 11:53:49,524Z,backend,GET /home 200 OK,None
+2025-05-18 11:53:52,486Z,backend,POST /login successful,None
+2025-05-18 11:53:56,454Z,backend,Login failed: Invalid email,ValueError
+2025-05-18 11:53:56,561Z,backend,[ALERT] Login failed: Invalid email,ValueError
+2025-05-18 11:54:07,446Z,backend,Login failed: Invalid email,ValueError
+2025-05-18 11:54:07,473Z,backend,[ALERT] Login failed: Invalid email,ValueError
+2025-05-18 11:54:08,241Z,backend,Login failed: Invalid email,ValueError
+2025-05-18 11:54:08,328Z,backend,[ALERT] Login failed: Invalid email,ValueError
+2025-05-18 11:54:08,428Z,backend,Login failed: Invalid email,ValueError
+2025-05-18 11:54:08,459Z,backend,[ALERT] Login failed: Invalid email,ValueError
+2025-05-18 11:54:08,617Z,backend,Login failed: Invalid email,ValueError
+2025-05-18 11:54:08,677Z,backend,[ALERT] Login failed: Invalid email,ValueError
