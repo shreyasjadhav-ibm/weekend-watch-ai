@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weekend AI Bot - Hackathon Demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        #alert-modal {
+            display: none;
+            position: fixed;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #ffffff, #f0f7ff);
+            border: 2px solid #3b82f6;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            max-width: 600px;
+            width: 90%;
+            transition: all 0.3s ease-in-out;
+        }
+        #alert-modal.show {
+            display: block;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateX(-50%) scale(0.9); }
+            to { opacity: 1; transform: translateX(-50%) scale(1); }
+        }
+        #recommendation {
+            background: #1f2937;
+            color: #e5e7eb;
+            padding: 12px;
+            border-radius: 8px;
+            font-family: 'Courier New', Courier, monospace;
+            white-space: pre-wrap;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        .btn {
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 min-h-screen flex flex-col">
+    <header class="bg-blue-600 text-white p-4 shadow-md">
+        <h1 class="text-2xl font-bold text-center">Weekend AI Bot: Anomaly Detection</h1>
+    </header>
+    <main class="flex-grow flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg shadow-xl p-6 max-w-md w-full">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">Login</h2>
+            <form id="login-form" class="space-y-4">
+                <input type="email" id="email" placeholder="Enter your email" class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <button type="submit" class="w-full bg-blue-500 text-white p-3 rounded-lg hover:bg-blue-600 btn">Login</button>
+            </form>
+        </div>
+    </main>
+    <div id="alert-modal">
+        <p id="alert-message" class="text-lg font-semibold text-gray-800 mb-4"></p>
+        <p class="text-gray-600 mb-4">Would you like a fix suggestion?</p>
+        <div id="recommendation" class="hidden mb-4"></div>
+        <div id="initial-buttons" class="flex justify-end space-x-4">
+            <button id="suggest-yes" class="bg-blue-500 text-white btn hover:bg-blue-600">Yes</button>
+            <button id="suggest-no" class="bg-gray-300 text-gray-800 btn hover:bg-gray-400">No</button>
+        </div>
+        <div id="fix-buttons" class="hidden flex justify-end space-x-4">
+            <button id="fix-error" class="bg-green-500 text-white btn hover:bg-green-600">Fix this by Weekend Bot</button>
+            <button id="close-suggestion" class="bg-gray-300 text-gray-800 btn hover:bg-gray-400">Close</button>
+        </div>
+    </div>
+    <footer class="bg-gray-800 text-white p-4 text-center">
+        <p>Built for Hackathon 2025 | Powered by AI</p>
+    </footer>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
