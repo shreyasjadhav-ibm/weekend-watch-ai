@@ -44,12 +44,7 @@ Follow these steps to set up and run **WeekendWatchAI**:
    - Obtain a Gemini API key from [Google AI Studio](https://aistudio.google.com/) or Google Cloud Console.
    - Ensure `.env` is listed in `.gitignore` to avoid committing sensitive data.
 
-3. **Install Dependencies**:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-4. **Train the RandomForestClassifier**:
+3. **Train the RandomForestClassifier**:
    - Place your log CSV (e.g., `logs.csv`) in the project root.
    - Run the training script to generate the model:
      ```bash
@@ -64,38 +59,11 @@ Follow these steps to set up and run **WeekendWatchAI**:
      ```
    - The API will be available at `http://localhost:5000`.
 
-6. **Test the API**:
-   - **Analyze a single log**:
-     ```bash
-     curl -X POST http://localhost:5000/api/analyze-logs \
-       -H "Content-Type: application/json" \
-       -d '{
-           "log_message": "ERROR: TypeError: Cannot read property 'map' of undefined",
-           "anomaly_type": "react_render_error"
-       }'
-     ```
-     - If an anomaly is detected, the response includes `"prompt_user": true`. To request a fix:
-       ```bash
-       curl -X POST http://localhost:5000/api/fix-log \
-         -H "Content-Type: application/json" \
-         -d '{
-             "log_message": "ERROR: TypeError: Cannot read property 'map' of undefined",
-             "anomaly_type": "react_render_error",
-             "fix": true
-         }'
-       ```
-   - **Process CSV logs**:
-     ```bash
-     curl -X POST http://localhost:5000/api/process-csv-logs \
-       -F "file=@logs.csv"
-     ```
-
-7. **Monitor and Interact**:
+6. **Monitor and Interact**:
    - The API flags anomalies and prompts for fixes. Integrate with a UI (e.g., React) to display prompts and trigger `/api/fix-log` when users choose to fix.
    - Alerts (e.g., Slack, email) can be configured for critical anomalies or fix outcomes.
 
 ## Notes
 - Ensure your CSV logs have columns: `timestamp`, `log_message`, `is_anomaly`, `anomaly_type`.
 - The RandomForestClassifier requires sufficient labeled data (`is_anomaly`) for training.
-- For production, deploy to a cloud provider (e.g., Google Cloud Run) and use a database for log storage.
 - Secure the Gemini API key using environment variables or a secret manager.
