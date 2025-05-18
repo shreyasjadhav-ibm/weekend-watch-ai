@@ -3,42 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weekend AI Bot - Hackathon Demo</title>
+    <title>Weekend AI Bot - Login</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;600&display=swap" rel="stylesheet">
     <style>
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+        }
         #alert-modal {
-            display: none;
+            display: none !important;
             position: fixed;
-            top: 20%;
+            top: 10%;
             left: 50%;
             transform: translateX(-50%);
-            background: linear-gradient(135deg, #ffffff, #f0f7ff);
-            border: 2px solid #3b82f6;
+            background: #1a1a1a;
+            border: 2px solid #ff0000;
             border-radius: 12px;
             padding: 24px;
-            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 15px rgba(255, 0, 0, 0.3);
             z-index: 1000;
-            max-width: 600px;
-            width: 90%;
+            max-width: 900px;
+            width: 95%;
+            flex-direction: row;
             transition: all 0.3s ease-in-out;
         }
         #alert-modal.show {
-            display: block;
+            display: flex !important;
             animation: fadeIn 0.3s ease-in-out;
         }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateX(-50%) scale(0.9); }
             to { opacity: 1; transform: translateX(-50%) scale(1); }
         }
+        #alert-content {
+            flex: 1;
+            padding-right: 20px;
+        }
         #recommendation {
-            background: #1f2937;
-            color: #e5e7eb;
-            padding: 12px;
+            flex: 2;
+            background: #000000;
+            color: #ffffff;
+            padding: 16px;
             border-radius: 8px;
             font-family: 'Courier New', Courier, monospace;
             white-space: pre-wrap;
-            max-height: 200px;
+            max-height: 400px;
             overflow-y: auto;
+            border: 1px solid #ff0000;
         }
         .btn {
             padding: 8px 16px;
@@ -48,36 +61,91 @@
         }
         .btn:hover {
             transform: translateY(-2px);
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+        }
+        .fix-btn {
+            background-color: #00ff00;
+            color: #000000;
+            animation: glow-green 1.5s ease-in-out infinite alternate;
+        }
+        @keyframes glow-green {
+            from { box-shadow: 0 0 5px rgba(0, 255, 0, 0.5); }
+            to { box-shadow: 0 0 20px rgba(0, 255, 0, 0.8), 0 0 30px rgba(0, 255, 0, 0.5); }
+        }
+        .form-container {
+            background: #1a1a1a;
+            border: 2px solid #ff0000;
+        }
+        input, textarea {
+            background: #333333;
+            color: #ffffff;
+            border: 1px solid #ff0000;
+        }
+        input:focus, textarea:focus {
+            border-color: #ff5555;
+            ring-color: #ff5555;
+        }
+        .back-button {
+            color: #ff0000;
+            border: 2px solid #ff0000;
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+        .back-button:hover {
+            background-color: #ff0000;
+            color: #000000;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
+        }
+        #user-suggestion {
+            width: 100%;
+            min-height: 80px;
+            resize: vertical;
+            margin-bottom: 12px;
+        }
+        .submit-btn {
+            background-color: #ff0000;
+            color: #ffffff;
+        }
+        .submit-btn:hover {
+            background-color: #ff5555;
         }
     </style>
 </head>
-<body class="bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 min-h-screen flex flex-col">
-    <header class="bg-blue-600 text-white p-4 shadow-md">
-        <h1 class="text-2xl font-bold text-center">Weekend AI Bot: Anomaly Detection</h1>
+<body class="min-h-screen flex flex-col">
+    <header class="bg-black text-red-500 p-4 shadow-md border-b-2 border-red-500 flex justify-between items-center">
+        <h1 class="text-3xl font-light">Weekend AI Login</h1>
+        <a href="/" class="back-button">Back to Home</a>
     </header>
     <main class="flex-grow flex items-center justify-center p-4">
-        <div class="bg-white rounded-lg shadow-xl p-6 max-w-md w-full">
-            <h2 class="text-xl font-semibold text-gray-800 mb-4">Login</h2>
+        <div class="form-container rounded-lg shadow-xl p-6 max-w-md w-full">
+            <h2 class="text-xl font-semibold text-red-500 mb-4">Login</h2>
             <form id="login-form" class="space-y-4">
-                <input type="email" id="email" placeholder="Enter your email" class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                <button type="submit" class="w-full bg-blue-500 text-white p-3 rounded-lg hover:bg-blue-600 btn">Login</button>
+                <input type="email" id="email" placeholder="Enter your email" class="w-full p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500">
+                <button type="submit" class="w-full bg-red-500 text-white p-3 rounded-lg hover:bg-red-600 btn">Login</button>
             </form>
         </div>
     </main>
     <div id="alert-modal">
-        <p id="alert-message" class="text-lg font-semibold text-gray-800 mb-4"></p>
-        <p class="text-gray-600 mb-4">Would you like a fix suggestion?</p>
-        <div id="recommendation" class="hidden mb-4"></div>
-        <div id="initial-buttons" class="flex justify-end space-x-4">
-            <button id="suggest-yes" class="bg-blue-500 text-white btn hover:bg-blue-600">Yes</button>
-            <button id="suggest-no" class="bg-gray-300 text-gray-800 btn hover:bg-gray-400">No</button>
+        <div id="alert-content">
+            <p id="alert-message" class="text-lg font-semibold text-red-500 mb-4"></p>
+            <p class="text-gray-300 mb-4">Would you like a fix suggestion?</p>
+            <div id="initial-buttons" class="flex justify-end space-x-4">
+                <button id="suggest-yes" class="bg-red-500 text-white btn hover:bg-red-600">Yes</button>
+                <button id="suggest-no" class="bg-gray-600 text-white btn hover:bg-gray-700">No</button>
+            </div>
+            <div id="suggestion-input" class="hidden mt-4">
+                <textarea id="user-suggestion" placeholder="Enter your suggestion (optional, e.g., 'remove the whole block' or 'fix only the parenthesis')" class="w-full p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"></textarea>
+                <button id="submit-suggestion" class="submit-btn btn">Submit</button>
+            </div>
+            <div id="fix-buttons" class="hidden flex justify-end space-x-4">
+                <button id="fix-error" class="fix-btn btn">Fix this by Weekend Bot</button>
+                <button id="close-suggestion" class="bg-gray-600 text-white btn hover:bg-gray-700">Close</button>
+            </div>
         </div>
-        <div id="fix-buttons" class="hidden flex justify-end space-x-4">
-            <button id="fix-error" class="bg-green-500 text-white btn hover:bg-green-600">Fix this by Weekend Bot</button>
-            <button id="close-suggestion" class="bg-gray-300 text-gray-800 btn hover:bg-gray-400">Close</button>
-        </div>
+        <div id="recommendation" class="hidden"></div>
     </div>
-    <footer class="bg-gray-800 text-white p-4 text-center">
+    <footer class="bg-black text-red-500 p-4 text-center border-t-2 border-red-500">
         <p>Built for Hackathon 2025 | Powered by AI</p>
     </footer>
     <script src="{{ url_for('static', filename='script.js') }}"></script>

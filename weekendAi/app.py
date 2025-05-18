@@ -25,8 +25,13 @@ GEMINI_API_KEY = os.getenv('GEMINI_API_KEY', 'your-api-key')  # Replace with you
 genai.configure(api_key=GEMINI_API_KEY)
 
 @app.route('/')
-def home():
-    logger.info('GET /home 200 OK,None')
+def landing():
+    logger.info('GET /landing 200 OK,None')
+    return render_template('landing.html')
+
+@app.route('/login')
+def login_page():
+    logger.info('GET /login 200 OK,None')
     return render_template('index.html')
 
 @app.route('/login', methods=['POST'])
@@ -73,19 +78,36 @@ def suggest_fix():
         with open('static/script.js', 'r') as f:
             code = f.read()
         prompt = f"""
-        Error: {log['message']}
-        Error Type: {log['error_type']}
-        Source: {log['source']}
-        Code:
-        {code}
+Error: {log['message']}
+Error Type: {log['error_type']}
+Source: {log['source']}
+Code:
+{code}
 
-        Suggest a fix for the JavaScript error, focusing on the faulty function. Provide the corrected function code in a ```javascript block. Example:
-        ```javascript
-        function correctedFunction() {{
-            // Corrected code
-        }}
-        ```
-        """
+You are an expert JavaScript debugger tasked with fixing a JavaScript error in the provided code. Follow these steps:
+1. Analyze the error message, type, and source to identify the root cause (e.g., syntax error in a function, undefined variable).
+2. Locate the affected code section (function, variable, or statement) in the provided code.
+3. Apply the minimal changes needed to fix the error, preserving all other code (e.g., other functions, event listeners) exactly as is.
+4. If the user suggestion is provided (e.g., 'remove the whole block', 'fix only the parenthesis'), incorporate it into the fix:
+   - 'remove the whole block': Delete the faulty function or code block if safe.
+   - 'fix only the parenthesis': Correct only the syntax issue.
+   - Other suggestions: Adapt the fix to align with the user's intent.
+5. If no user suggestion is provided, apply the most straightforward fix.
+6. Output the entire corrected code for the file, including all unchanged parts, in a ```javascript block.
+7. Ensure the output is valid JavaScript, maintaining original formatting and comments where possible.
+
+Example output:
+```javascript
+// Original code with other functions
+function otherFunction() {{
+    console.log('Unchanged');
+}}
+// Corrected function
+function faultyFunction() {{
+    console.log('Fixed');
+}}
+Do not add explanations outside the code block unless requested. Only return the ```javascript block with the full corrected code.
+"""
         model = genai.GenerativeModel('gemini-1.5-flash')
         response = model.generate_content(prompt)
         suggestion = response.text
@@ -105,22 +127,22 @@ def apply_fix():
         data = request.json
         extracted_code = data.get('extracted_code')
         if not extracted_code:
+            logger.error('No code provided for fix,None')
             return jsonify({'error': 'No code provided'}), 400
-        # Read script.js and replace the faulty function
-        with open('static/script.js', 'r') as f:
-            current_code = f.read()
-        # Assume the function to replace is 'brokenSyntax' for now
-        # Use regex to replace the function (simplified for brokenSyntax)
-        new_code = re.sub(
-            r'function brokenSyntax\(\) \{[\s\S]*?\}',
-            extracted_code,
-            current_code
-        )
-        # Save the updated code
+        # Validate code (basic check for non-empty JavaScript)
+        if not extracted_code.strip() or 'function' not in extracted_code:
+            logger.error('Invalid JavaScript code provided,None')
+            return jsonify({'error': 'Invalid JavaScript code'}), 400
+        # Overwrite script.js with the full corrected code
         with open('static/script.js', 'w') as f:
-            f.write(new_code)
+            f.write(extracted_code)
+        logger.info('Code fix applied successfully,None')
         return jsonify({'status': 'Code updated successfully'})
+    except IOError as e:
+        logger.error(f'File write error: {str(e)},IOError')
+        return jsonify({'error': f'Failed to write file: {str(e)}'}), 500
     except Exception as e:
+        logger.error(f'Unexpected error in apply-fix: {str(e)},{type(e).__name__}')
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
