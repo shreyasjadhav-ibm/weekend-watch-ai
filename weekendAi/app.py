@@ -25,8 +25,13 @@ GEMINI_API_KEY = os.getenv('GEMINI_API_KEY', 'your-api-key')  # Replace with you
 genai.configure(api_key=GEMINI_API_KEY)
 
 @app.route('/')
-def home():
-    logger.info('GET /home 200 OK,None')
+def landing():
+    logger.info('GET /landing 200 OK,None')
+    return render_template('landing.html')
+
+@app.route('/login')
+def login_page():
+    logger.info('GET /login 200 OK,None')
     return render_template('index.html')
 
 @app.route('/login', methods=['POST'])
@@ -110,7 +115,6 @@ def apply_fix():
         with open('static/script.js', 'r') as f:
             current_code = f.read()
         # Assume the function to replace is 'brokenSyntax' for now
-        # Use regex to replace the function (simplified for brokenSyntax)
         new_code = re.sub(
             r'function brokenSyntax\(\) \{[\s\S]*?\}',
             extracted_code,
