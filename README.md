@@ -57,7 +57,11 @@ Follow these steps to set up and run **WeekendWatchAI**:
      ```bash
      python app.py
      ```
-   - The API will be available at `http://localhost:5000`.
+   - Start the monitoring log
+     ```bash
+     python monitor_logs.py
+     ``` 
+   - The API will be available at `http://localhost:5001`.
 
 6. **Monitor and Interact**:
    - The API flags anomalies and prompts for fixes. Integrate with a UI (e.g., React) to display prompts and trigger `/api/fix-log` when users choose to fix.
