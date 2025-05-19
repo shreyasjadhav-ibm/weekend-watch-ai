@@ -30,10 +30,7 @@ alert_queue = Queue()
 # Store pending fixes {issue_id: {log, before_code, after_code, approved}}
 pending_fixes = {}
 
-DEVELOPER_EMAIL = 'amoggha03@ibm.com'
-EMAIL_SENDER = 'amoggha03@gmail.com'  # Replace with your Gmail
-EMAIL_PASSWORD = 'ixpvyrcguxgvrnzl'              # Your Gmail App Password
-IMAP_SERVER = 'imap.gmail.com'
+
 
 # Configure Gemini API
 GEMINI_API_KEY = os.getenv('GEMINI_API_KEY', 'your-api-key')  # Replace with your key
