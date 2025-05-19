@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weekend AI Bot - Login</title>
+    <title>Weekend AI Bot - Connectors</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;600&display=swap" rel="stylesheet">
     <style>
@@ -68,6 +68,12 @@
             color: #000000;
             animation: glow-green 1.5s ease-in-out infinite alternate;
         }
+        .fix-btn:disabled {
+            background-color: #666666;
+            color: #333333;
+            animation: none;
+            cursor: not-allowed;
+        }
         @keyframes glow-green {
             from { box-shadow: 0 0 5px rgba(0, 255, 0, 0.5); }
             to { box-shadow: 0 0 20px rgba(0, 255, 0, 0.8), 0 0 30px rgba(0, 255, 0, 0.5); }
@@ -110,20 +116,68 @@
         .submit-btn:hover {
             background-color: #ff5555;
         }
+        .run-connector-btn {
+            background-color: #ff0000;
+            color: #ffffff;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .run-connector-btn:hover {
+            background-color: #ff5555;
+            transform: translateY(-2px);
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
+        }
+        #loading-animation {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #1a1a1a;
+            border: 2px solid #ff0000;
+            border-radius: 12px;
+            padding: 24px;
+            z-index: 1001;
+            text-align: center;
+        }
+        #loading-animation.show {
+            display: block;
+        }
+        .loading-text {
+            color: #ff0000;
+            font-size: 1.5rem;
+            font-weight: 600;
+            animation: glow-red 1.5s ease-in-out infinite alternate;
+        }
+        @keyframes glow-red {
+            from { text-shadow: 0 0 5px rgba(255, 0, 0, 0.5); }
+            to { text-shadow: 0 0 20px rgba(255, 0, 0, 0.8); }
+        }
+        .spinner {
+            border: 4px solid #333333;
+            border-top: 4px solid #ff0000;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 16px auto;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col">
     <header class="bg-black text-red-500 p-4 shadow-md border-b-2 border-red-500 flex justify-between items-center">
-        <h1 class="text-3xl font-light">Weekend AI Login</h1>
+        <h1 class="text-3xl font-light">Weekend AI Connectors</h1>
         <a href="/" class="back-button">Back to Home</a>
     </header>
     <main class="flex-grow flex items-center justify-center p-4">
         <div class="form-container rounded-lg shadow-xl p-6 max-w-md w-full">
-            <h2 class="text-xl font-semibold text-red-500 mb-4">Login</h2>
-            <form id="login-form" class="space-y-4">
-                <input type="email" id="email" placeholder="Enter your email" class="w-full p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500">
-                <button type="submit" class="w-full bg-red-500 text-white p-3 rounded-lg hover:bg-red-600 btn">Login</button>
-            </form>
+            <h2 class="text-xl font-semibold text-red-500 mb-4">Run Connector</h2>
+            <button id="run-connector" class="run-connector-btn w-full">Run Connector</button>
         </div>
     </main>
     <div id="alert-modal">
@@ -135,15 +189,22 @@
                 <button id="suggest-no" class="bg-gray-600 text-white btn hover:bg-gray-700">No</button>
             </div>
             <div id="suggestion-input" class="hidden mt-4">
-                <textarea id="user-suggestion" placeholder="Enter your suggestion (optional, e.g., 'remove the whole block' or 'fix only the parenthesis')" class="w-full p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"></textarea>
+                <textarea id="user-suggestion" placeholder="You can enter your concern- what's happening?" class="w-full p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"></textarea>
                 <button id="submit-suggestion" class="submit-btn btn">Submit</button>
             </div>
+            <div id="waiting-approval" class="hidden mt-4">
+                <p class="text-gray-300">Waiting for developer's approval...</p>
+            </div>
             <div id="fix-buttons" class="hidden flex justify-end space-x-4">
-                <button id="fix-error" class="fix-btn btn">Fix this by Weekend Bot</button>
+                <button id="fix-error" class="fix-btn btn" disabled>Fix this by Weekend Bot</button>
                 <button id="close-suggestion" class="bg-gray-600 text-white btn hover:bg-gray-700">Close</button>
             </div>
         </div>
         <div id="recommendation" class="hidden"></div>
+    </div>
+    <div id="loading-animation">
+        <div class="spinner"></div>
+        <p class="loading-text">Our Developers are chilling today, Don't worry AI can solve your issue</p>
     </div>
     <footer class="bg-black text-red-500 p-4 text-center border-t-2 border-red-500">
         <p>Built for Hackathon 2025 | Powered by AI</p>
