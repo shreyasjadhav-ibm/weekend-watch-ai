@@ -29,21 +29,21 @@ def landing():
     logger.info('GET /landing 200 OK,None')
     return render_template('landing.html')
 
-@app.route('/login')
-def login_page():
-    logger.info('GET /login 200 OK,None')
+@app.route('/connectors')
+def connectors_page():
+    logger.info('GET /connectors 200 OK,None')
     return render_template('index.html')
 
-@app.route('/login', methods=['POST'])
-def login():
+@app.route('/run-connector', methods=['POST'])
+def run_connector():
     try:
         data = request.json
-        if not data.get('email'):
-            raise ValueError('Invalid email')
-        logger.info('POST /login successful,None')
+        if not data.get('connector'):
+            raise ValueError('Invalid connector name')
+        logger.info('POST /run-connector successful,None')
         return jsonify({'status': 'success'})
     except Exception as e:
-        logger.error(f'Login failed: {str(e)},{type(e).__name__}')
+        logger.error(f'Connector run failed: {str(e)},{type(e).__name__}')
         return jsonify({'error': str(e)}), 400
 
 @app.route('/api/data')
@@ -74,6 +74,7 @@ def alerts():
 @app.route('/suggest-fix', methods=['POST'])
 def suggest_fix():
     log = request.json
+    user_suggestion = log.get('user_suggestion', '')
     try:
         with open('static/script.js', 'r') as f:
             code = f.read()
@@ -83,14 +84,15 @@ Error Type: {log['error_type']}
 Source: {log['source']}
 Code:
 {code}
+User Suggestion (optional): {user_suggestion}
 
 You are an expert JavaScript debugger tasked with fixing a JavaScript error in the provided code. Follow these steps:
 1. Analyze the error message, type, and source to identify the root cause (e.g., syntax error in a function, undefined variable).
 2. Locate the affected code section (function, variable, or statement) in the provided code.
 3. Apply the minimal changes needed to fix the error, preserving all other code (e.g., other functions, event listeners) exactly as is.
-4. If the user suggestion is provided (e.g., 'remove the whole block', 'fix only the parenthesis'), incorporate it into the fix:
-   - 'remove the whole block': Delete the faulty function or code block if safe.
-   - 'fix only the parenthesis': Correct only the syntax issue.
+4. If the user suggestion is provided (e.g., 'initialize the connector', 'fix the configuration'), incorporate it into the fix:
+   - 'initialize the connector': Add or correct the missing initialization function.
+   - 'fix the configuration': Ensure proper configuration object setup.
    - Other suggestions: Adapt the fix to align with the user's intent.
 5. If no user suggestion is provided, apply the most straightforward fix.
 6. Output the entire corrected code for the file, including all unchanged parts, in a ```javascript block.
@@ -102,10 +104,12 @@ Example output:
 function otherFunction() {{
     console.log('Unchanged');
 }}
-// Corrected function
-function faultyFunction() {{
-    console.log('Fixed');
+// Corrected code
+function initializeConnector() {{
+    console.log('Initialized');
 }}
+```
+
 Do not add explanations outside the code block unless requested. Only return the ```javascript block with the full corrected code.
 """
         model = genai.GenerativeModel('gemini-1.5-flash')

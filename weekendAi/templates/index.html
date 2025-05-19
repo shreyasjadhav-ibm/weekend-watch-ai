@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weekend AI Bot - Login</title>
+    <title>Weekend AI Bot - Connectors</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;600&display=swap" rel="stylesheet">
     <style>
@@ -110,20 +110,30 @@
         .submit-btn:hover {
             background-color: #ff5555;
         }
+        .run-connector-btn {
+            background-color: #ff0000;
+            color: #ffffff;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .run-connector-btn:hover {
+            background-color: #ff5555;
+            transform: translateY(-2px);
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col">
     <header class="bg-black text-red-500 p-4 shadow-md border-b-2 border-red-500 flex justify-between items-center">
-        <h1 class="text-3xl font-light">Weekend AI Login</h1>
+        <h1 class="text-3xl font-light">Weekend AI Connectors</h1>
         <a href="/" class="back-button">Back to Home</a>
     </header>
     <main class="flex-grow flex items-center justify-center p-4">
         <div class="form-container rounded-lg shadow-xl p-6 max-w-md w-full">
-            <h2 class="text-xl font-semibold text-red-500 mb-4">Login</h2>
-            <form id="login-form" class="space-y-4">
-                <input type="email" id="email" placeholder="Enter your email" class="w-full p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500">
-                <button type="submit" class="w-full bg-red-500 text-white p-3 rounded-lg hover:bg-red-600 btn">Login</button>
-            </form>
+            <h2 class="text-xl font-semibold text-red-500 mb-4">Run Connector</h2>
+            <button id="run-connector" class="run-connector-btn w-full">Run Connector</button>
         </div>
     </main>
     <div id="alert-modal">
@@ -135,7 +145,7 @@
                 <button id="suggest-no" class="bg-gray-600 text-white btn hover:bg-gray-700">No</button>
             </div>
             <div id="suggestion-input" class="hidden mt-4">
-                <textarea id="user-suggestion" placeholder="Enter your suggestion (optional, e.g., 'remove the whole block' or 'fix only the parenthesis')" class="w-full p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"></textarea>
+                <textarea id="user-suggestion" placeholder="Enter your suggestion (optional, e.g., 'initialize the connector' or 'fix the configuration')" class="w-full p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"></textarea>
                 <button id="submit-suggestion" class="submit-btn btn">Submit</button>
             </div>
             <div id="fix-buttons" class="hidden flex justify-end space-x-4">

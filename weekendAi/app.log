@@ -1,47 +1,12 @@
-2025-05-18 13:46:22,550Z,backend,GET /landing 200 OK,None
-2025-05-18 13:46:23,600Z,backend,GET /login 200 OK,None
-2025-05-18 13:46:25,479Z,backend,[ALERT] myUndefinedFunction is not defined,ReferenceError
-2025-05-18 13:46:38,799Z,backend,POST /login successful,None
-2025-05-18 13:46:39,586Z,backend,POST /login successful,None
-2025-05-18 13:46:39,809Z,backend,[ALERT] myUndefinedFunction is not defined,ReferenceError
-2025-05-18 13:46:40,025Z,backend,POST /login successful,None
-2025-05-18 13:46:40,234Z,backend,POST /login successful,None
-2025-05-18 13:46:40,450Z,backend,[ALERT] myUndefinedFunction is not defined,ReferenceError
-2025-05-18 13:46:40,661Z,backend,POST /login successful,None
-2025-05-18 13:46:40,878Z,backend,POST /login successful,None
-2025-05-18 13:46:41,084Z,backend,POST /login successful,None
-2025-05-18 13:46:41,286Z,backend,[ALERT] myUndefinedFunction is not defined,ReferenceError
-2025-05-18 13:46:41,484Z,backend,POST /login successful,None
-2025-05-18 13:46:41,696Z,backend,POST /login successful,None
-2025-05-18 13:46:41,874Z,backend,POST /login successful,None
-2025-05-18 13:46:42,062Z,backend,POST /login successful,None
-2025-05-18 13:46:42,247Z,backend,POST /login successful,None
-2025-05-18 13:46:42,408Z,backend,POST /login successful,None
-2025-05-18 13:46:46,479Z,backend,POST /login successful,None
-2025-05-18 13:46:46,606Z,backend,[ALERT] myUndefinedFunction is not defined,ReferenceError
-2025-05-18 13:46:46,764Z,backend,POST /login successful,None
-2025-05-18 13:46:46,923Z,backend,POST /login successful,None
-2025-05-18 13:46:50,235Z,backend,Login failed: Invalid email,ValueError
-2025-05-18 13:46:50,328Z,backend,[ALERT] Login failed: Invalid email,ValueError
-2025-05-18 13:46:50,590Z,backend,[ALERT] myUndefinedFunction is not defined,ReferenceError
-2025-05-18 13:47:09,152Z,backend,Code fix applied successfully,None
-2025-05-18 13:47:26,953Z,backend,POST /login successful,None
-2025-05-18 13:47:27,718Z,backend,POST /login successful,None
-2025-05-18 13:47:28,185Z,backend,[ALERT] myUndefinedFunction is not defined,ReferenceError
-2025-05-18 13:47:28,686Z,backend,POST /login successful,None
-2025-05-18 13:47:29,027Z,backend,POST /login successful,None
-2025-05-18 13:47:29,285Z,backend,POST /login successful,None
-2025-05-18 13:47:29,470Z,backend,POST /login successful,None
-2025-05-18 13:47:29,709Z,backend,POST /login successful,None
-2025-05-18 13:47:29,890Z,backend,POST /login successful,None
-2025-05-18 13:47:30,101Z,backend,POST /login successful,None
-2025-05-18 13:47:30,258Z,backend,POST /login successful,None
-2025-05-18 13:47:30,442Z,backend,[ALERT] myUndefinedFunction is not defined,ReferenceError
-2025-05-18 13:47:30,596Z,backend,POST /login successful,None
-2025-05-18 13:47:30,756Z,backend,POST /login successful,None
-2025-05-18 13:47:35,404Z,backend,POST /login successful,None
-2025-05-18 13:47:35,566Z,backend,POST /login successful,None
-2025-05-18 13:47:35,692Z,backend,[ALERT] myUndefinedFunction is not defined,ReferenceError
-2025-05-18 13:47:35,848Z,backend,POST /login successful,None
-2025-05-18 13:47:36,007Z,backend,[ALERT] myUndefinedFunction is not defined,ReferenceError
-2025-05-18 13:47:36,168Z,backend,POST /login successful,None
+2025-05-18 14:30:48,856Z,backend,GET /landing 200 OK,None
+2025-05-18 14:30:52,138Z,backend,GET /login 200 OK,None
+2025-05-18 14:31:02,095Z,backend,[ALERT] myUndefinedFunction is not defined,ReferenceError
+2025-05-19 07:36:17,584Z,backend,GET /landing 200 OK,None
+2025-05-19 07:36:57,504Z,backend,GET /landing 200 OK,None
+2025-05-19 07:37:23,040Z,backend,GET /landing 200 OK,None
+2025-05-19 07:39:21,644Z,backend,GET /landing 200 OK,None
+2025-05-19 07:39:22,878Z,backend,GET /connectors 200 OK,None
+2025-05-19 07:39:24,794Z,backend,[ALERT] connectorConfig is undefined,TypeError
+2025-05-19 07:40:33,379Z,backend,Code fix applied successfully,None
+2025-05-19 07:40:35,886Z,backend,[ALERT] connectorConfig is undefined,TypeError
+2025-05-19 07:40:58,448Z,backend,POST /run-connector successful,None
